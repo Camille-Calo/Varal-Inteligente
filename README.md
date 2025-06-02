@@ -1,3 +1,15 @@
-O presente trabalho apresenta o desenvolvimento de um sistema automatizado voltado para a proteção de roupas contra intempéries por meio da automação de um varal convencional. O projeto surge da necessidade de solucionar problemas causados por mudanças climáticas repentinas, como chuvas inesperadas, que podem danificar roupas expostas no dia a dia. 
-A proposta consiste na criação de um protótipo funcional que utiliza a plataforma Arduino UNO, associada a Sensores de Chuva e motores, para permitir que o varal realize, de forma autônoma, os movimentos de recolhimento e abertura. Para isso, foi desenvolvida uma maquete didática representando a estrutura de um varal tradicional, adaptada para receber os componentes eletrônicos e eletromecânicos necessários. 
-Os testes demonstraram que o sistema é eficiente tanto na execução de comandos programados quanto na resposta automática às variações climáticas detectadas pelos sensores. Além de oferecer maior praticidade no dia a dia, o projeto contribui para a redução do uso de secadoras elétricas, promovendo economia de energia, preservação das roupas e práticas sustentáveis!
+# Projeto Varal Inteligente
+
+## Descrição
+
+Esse projeto apresenta o desenvolvimento de um sistema automatizado para proteção de roupas expostas, composto por um microcontrolador Arduino UNO, um sensor de chuva e um conjunto de acionamento eletromecânico via Ponte H e motor DC. O sistema executa, de forma autônoma, o recolhimento do varal mediante detecção de precipitação, promovendo a proteção dos materiais e a otimização de recursos, com foco em eficiência energética e sustentabilidade.
+## Sobre o projeto
+
+## Materiais Utilizados
+
++ Arduino UNO
++ Micro Switch Fliperama Chinlong
++ Ponte H L298N
++ Sensor de chuva 12V/5V
++ Motor F130S-2070-35
++ Adaptador de energia regulável 3-12V
