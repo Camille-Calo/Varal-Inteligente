@@ -1,7 +1,7 @@
-// Pinos do sensor e switches
+// Pinos do sensor e switches 
 const int sensorChuva = 13;
-const int switchAberto = 11;   // Fim de curso de teto ABERTO
-const int switchFechado = 12;  // Fim de curso de teto FECHADO
+const int switchAberto = 3;   // Fim de curso de teto ABERTO
+const int switchFechado = 2;  // Fim de curso de teto FECHADO
 
 // Pinos do motor (ponte H L298N)
 const int in1 = 8;
@@ -12,7 +12,6 @@ const int ena = 10; // PWM
 const int velocidade = 128;
 
 void setup() {
-  // Configura pinos
   pinMode(sensorChuva, INPUT);
   pinMode(switchAberto, INPUT_PULLUP);
   pinMode(switchFechado, INPUT_PULLUP);
@@ -27,19 +26,21 @@ void setup() {
 
 void loop() {
   bool chovendo = digitalRead(sensorChuva) == LOW;
-  bool tetoAberto = digitalRead(switchAberto) == LOW;   // Pressionado = ABERTO
-  bool tetoFechado = digitalRead(switchFechado) == LOW; // Pressionado = FECHADO
+  bool tetoAberto = digitalRead(switchAberto) == LOW;
+  bool tetoFechado = digitalRead(switchFechado) == LOW;
 
   if (chovendo && !tetoFechado) {
-    Serial.println(" Chuva detectada!  Fechando teto...");
+    Serial.println("💧 Chuva detectada! ⬇️ Fechando teto...");
     fecharTeto();
-  } else if (!chovendo && !tetoAberto) {
-    Serial.println(" Sem chuva.  Abrindo teto...");
+  } 
+  else if (!chovendo && !tetoAberto) {
+    Serial.println("☀️ Sem chuva. ⬆️ Abrindo teto...");
     abrirTeto();
-  } else {
+  } 
+  else {
     pararMotor();
-    if (tetoAberto) Serial.println(" Teto totalmente ABERTO.");
-    if (tetoFechado) Serial.println(" Teto totalmente FECHADO.");
+    if (tetoAberto) Serial.println("✅ Teto totalmente ABERTO.");
+    if (tetoFechado) Serial.println("✅ Teto totalmente FECHADO.");
   }
 
   delay(1000);
@@ -55,6 +56,16 @@ void fecharTeto() {
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   analogWrite(ena, velocidade);
+
+  unsigned long tempoInicio = millis();
+  const unsigned long tempoLimite = 5000; // 5 segundos máx. tentando fechar
+
+  // Espera até detectar o fim de curso de fechamento ou atingir o tempo limite
+  while (digitalRead(switchFechado) == HIGH && millis() - tempoInicio < tempoLimite) {
+    delay(50); // pequena pausa para leitura estável
+  }
+
+  pararMotor();
 }
 
 void pararMotor() {
